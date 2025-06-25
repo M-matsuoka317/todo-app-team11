@@ -78,12 +78,28 @@ func ListTasks() {
 		}
 	}
 	// panic("unimplemented")
+
 }
 
 func CompleteTask(id int) {
-	panic("unimplemented")
+	var tasks []Task
+	tasks,_ = loadTasks()
+	for i, task := range tasks {
+		if task.ID == id {
+			tasks[i].Done = true
+		}
+	}
+	saveTasks(tasks)
 }
 
 func DeleteTask(id int) {
-	panic("unimplemented")
+	var tasks []Task
+	var updated []Task
+	tasks,_ = loadTasks()
+	for _, task := range tasks {
+		if task.ID != id {
+			updated = append(updated, task)
+		}
+	}
+	saveTasks(updated)
 }
