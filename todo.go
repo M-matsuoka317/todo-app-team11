@@ -51,11 +51,34 @@ func nextID(tasks []Task) int {
 }
 
 func AddTask(title string) {
-	fmt.Println(loadTasks())
+	var tasks []Task
+	tasks, _ = loadTasks()
+	var new_id = nextID(tasks)
+	var task Task
+	task.Title = title
+	task.ID = new_id
+	task.Done = false
+	tasks = append(tasks, task)
+
+	// tasks[new_id-1] = task
+	// tasks := []Task{task}
+	// // var tasks []Task
+	saveTasks(tasks)
+	// panic("unimplemented")
 }
 
 func ListTasks() {
-	fmt.Println(loadTasks())
+	var tasks []Task
+	tasks, _ = loadTasks()
+	for _, v := range tasks{
+		if v.Done{
+			fmt.Println(v.ID, v.Title, "[x]")
+		} else {
+			fmt.Println(v.ID, v.Title, "[]")
+		}
+	}
+	// panic("unimplemented")
+
 }
 
 func CompleteTask(id int) {
